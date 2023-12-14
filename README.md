@@ -1,4 +1,4 @@
-# FFpy - ⚡ Fast Python Script Execution Timer ⏱️
+# FFpy - ⚡ Fast Python Script Execution Timer
 
 FFpy is a command-line tool that measures the execution time of Python scripts. It provides flexibility by allowing you to specify the time unit (milliseconds or seconds) and the number of runs for more accurate measurements.
 
