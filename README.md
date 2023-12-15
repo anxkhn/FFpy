@@ -4,9 +4,9 @@ FFpy is a command-line tool that measures the execution time of Python scripts. 
 
 ## Background 🚀
 
-As an undergraduate software engineer with Python as my weapon of choice for coding, I often found myself curious about the execution time of my scripts. While solutions like `timeit` module exist, I wanted a seamless way to measure execution time without adding another line of code to my programs. This led to the creation of FFpy.
+As an undergraduate software engineer with Python as my weapon of choice for coding, I often found myself curious about the execution time of my scripts. While solutions like `timeit` module exist, I wanted a seamless way to measure execution time without adding another line of code to my programs. This led to the creation of FFpy. 
 
-In my coding journey, especially while tackling Data Structures and Algorithms problems and optimizing code, understanding the execution time can provide valuable insights.
+In my coding journey, especially while tackling Data Structures and Algorithms problems and optimizing code, understanding the execution time can provide valuable insights. 
 
 FFpy aims to be a simple yet powerful tool for easily benchmarking performance without the need to modify your existing codebase. I believe in keeping things straightforward. FFpy is designed to be a minimalistic, no-nonsense module that integrates seamlessly into your workflow, allowing you to focus on coding while effortlessly obtaining execution time metrics.
 
@@ -31,12 +31,15 @@ pip install .
 After installation, you can use FFpy to measure the execution time of your Python scripts. Here's the basic syntax:
 
 ```bash
-ffpy <filename.py> [-ms | -s] [-n <num_runs>]
+ffpy <filename.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
 ```
 
 - `<filename.py>`: Replace with the actual filename of your Python script in the current directory.
-- `-ms` or `-s`: Optional flag to specify the time unit (milliseconds or seconds, default is milliseconds).
-- `-n <num_runs>`: Optional flag to specify the number of runs (default is 1).
+- `-u, --unit`: Optional flag to specify the time unit (ms or s, default is ms).
+- `-n, --number`: Optional flag to specify the number of runs (default is 1).
+- `-s, --silent`: Optional flag to run the script silently (suppress output).
+- `-v, --version`: Display script version.
+- `-h, --help`: Display help message.
 
 ### Examples 🌈
 
@@ -49,13 +52,19 @@ ffpy script.py
 2. Measure the execution time in seconds:
 
 ```bash
-ffpy script.py -s
+ffpy script.py -u s
 ```
 
 3. Run the script 10 times and measure the average execution time:
 
 ```bash
 ffpy script.py -n 10
+```
+
+4. Run the script silently:
+
+```bash
+ffpy script.py -s
 ```
 
 ### Hello? 🤔
@@ -76,7 +85,7 @@ This should output:
 
 ```
 Hello, FFpy!
-Execution time: XX.XX milliseconds
+Execution time: XX.XX ms
 ```
 
 ## Contributing 🤝
