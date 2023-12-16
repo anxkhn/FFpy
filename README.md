@@ -31,10 +31,11 @@ pip install .
 After installation, you can use FFpy to measure the execution time of your Python scripts. Here's the basic syntax:
 
 ```bash
-ffpy <filename.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
+ffpy <filename.py> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
 ```
 
 - `<filename.py>`: Replace with the actual filename of your Python script in the current directory.
+- `<filename2.py>`: Optional second script for comparison.
 - `-u, --unit`: Optional flag to specify the time unit (ms or s, default is ms).
 - `-n, --number`: Optional flag to specify the number of runs (default is 1).
 - `-s, --silent`: Optional flag to run the script silently (suppress output).
@@ -65,6 +66,12 @@ ffpy script.py -n 10
 
 ```bash
 ffpy script.py -s
+```
+
+5. Compare the execution times of two scripts:
+
+```bash
+ffpy bubble_sort.py merge_sort.py
 ```
 
 ### Hello? 🤔

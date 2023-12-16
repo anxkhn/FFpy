@@ -64,10 +64,11 @@ your Python scripts. Here’s the basic syntax:
 
 .. code:: bash
 
-   ffpy <filename.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
+   ffpy <filename.py> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
 
 -  ``<filename.py>``: Replace with the actual filename of your Python
    script in the current directory.
+-  ``<filename2.py>``: Optional second script for comparison.
 -  ``-u, --unit``: Optional flag to specify the time unit (ms or s,
    default is ms).
 -  ``-n, --number``: Optional flag to specify the number of runs
@@ -104,6 +105,12 @@ Examples 🌈
 
    ffpy script.py -s
 
+5. Compare the execution times of two scripts:
+
+.. code:: bash
+
+   ffpy bubble_sort.py merge_sort.py
+
 Hello? 🤔
 ~~~~~~~~~
 
@@ -139,6 +146,7 @@ License 📜
 This project is licensed under the GPLv3 License - check out `this
 website <https://www.tldrlegal.com/license/gnu-general-public-license-v3-gpl-3>`__
 for more information.
+
 """,
     long_description_content_type="text/x-rst",
     author="Anas Khan",
