@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='FFpy',
-    version='1.2.0',
+    name="FFpy",
+    version="1.3.0",
     packages=find_packages(),
     entry_points={
-        'console_scripts': [
-            'ffpy = ffpy.timer:main',
+        "console_scripts": [
+            "ffpy = ffpy.timer:main",
         ],
     },
-    description='Fast Python Script Execution Timer',
-    long_description= """
+    description="Fast Python Script Execution Timer",
+    long_description="""
 FFpy - ⚡ Fast Python Script Execution Timer
 ============================================
 
@@ -140,9 +140,9 @@ This project is licensed under the GPLv3 License - check out `this
 website <https://www.tldrlegal.com/license/gnu-general-public-license-v3-gpl-3>`__
 for more information.
 """,
-    long_description_content_type='text/x-rst',
-    author='Anas Khan',
-    author_email='anxkhn28@gmail.com',
-    url='https://github.com/anxkhn/FFpy',
-    license='GPL-3'
+    long_description_content_type="text/x-rst",
+    author="Anas Khan",
+    author_email="anxkhn28@gmail.com",
+    url="https://github.com/anxkhn/FFpy",
+    license="GPL-3",
 )
