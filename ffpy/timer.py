@@ -2,7 +2,7 @@ import subprocess
 import time
 import sys
 
-SCRIPT_VERSION = "1.3.0"
+SCRIPT_VERSION = "1.4.0"
 
 
 def run_script(script_filename, time_unit="ms", num_runs=1, silent=False):
@@ -41,6 +41,8 @@ def run_script(script_filename, time_unit="ms", num_runs=1, silent=False):
                 num_runs, average_execution_time, time_unit
             )
         )
+
+    return total_execution_time
 
 
 def display_help():
@@ -92,11 +94,31 @@ def main():
             i += 1
 
     print(script_filename_1)
-    run_script(script_filename_1, time_unit, num_runs, silent)
+    time_file_1 = run_script(script_filename_1, time_unit, num_runs, silent)
 
     if script_filename_2:
         print(script_filename_2)
-        run_script(script_filename_2, time_unit, num_runs, silent)
+        time_file_2 = run_script(script_filename_2, time_unit, num_runs, silent)
+        percentage_difference = ((time_file_2 - time_file_1) / time_file_1) * 100
+
+        if percentage_difference > 0:
+            print(
+                "{} is {:.2f}% faster than {}".format(
+                    script_filename_1, abs(percentage_difference), script_filename_2
+                )
+            )
+        elif percentage_difference < 0:
+            print(
+                "{} is {:.2f}% slower than {}".format(
+                    script_filename_1, abs(percentage_difference), script_filename_2
+                )
+            )
+        else:
+            print(
+                "{} and {} have the same execution time.".format(
+                    script_filename_1, script_filename_2
+                )
+            )
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="FFpy",
-    version="1.3.0",
+    version="1.4.0",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
@@ -111,11 +111,10 @@ Examples 🌈
 
    ffpy bubble_sort.py merge_sort.py
 
-Hello? 🤔
-~~~~~~~~~
+How to Use 🤔
+~~~~~~~~~~~~~
 
-Let’s include a simple “Hello FFpy” ``hello.py`` Python script as an
-example:
+1. Start by including a simple ``hello.py`` Python script as an example:
 
 .. code:: python
 
@@ -127,12 +126,37 @@ You can measure its execution time using FFpy:
 
    ffpy hello.py
 
-This should output:
+This should yield the following output:
 
 ::
 
    Hello, FFpy!
    Execution time: XX.XX ms
+
+2. Now, let’s examine the runtime of two different sorting algorithms.
+   We have a list of 1000 integers, and we’ll use ``merge_sort.py`` and
+   ``bubble_sort.py`` to sort them as examples:
+
+.. code:: bash
+
+   ffpy merge_sort.py bubble_sort.py --silent
+
+This will produce the following output:
+
+::
+
+   merge_sort.py
+   Execution time: 33.2839 ms
+   bubble_sort.py
+   Execution time: 65.3996 ms
+   merge_sort.py is 96.49% faster than bubble_sort.py.
+
+This difference in execution time is due to the fact that Merge sort is
+faster than bubble sort, thanks to its efficient divide-and-conquer
+approach, resulting in a time complexity of O(n log n). On the other
+hand, bubble sort, with its quadratic time complexity of O(n^2), proves
+to be less efficient for large datasets. We can clearly see the
+execution time differences between two programs.
 
 Contributing 🤝
 ---------------
