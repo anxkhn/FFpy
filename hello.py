@@ -1,5 +1,8 @@
+import sys
+
+
 def hello_world():
-    print("Hello, FFpy!")
+    print(sys.executable)
 
 
 hello_world()

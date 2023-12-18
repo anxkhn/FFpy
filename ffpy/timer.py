@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 import subprocess
 import time
 import sys
 
-SCRIPT_VERSION = "1.4.0"
+SCRIPT_VERSION = "1.4.1"
 
 
 def run_script(script_filename, time_unit="ms", num_runs=1, silent=False):
@@ -12,10 +14,10 @@ def run_script(script_filename, time_unit="ms", num_runs=1, silent=False):
         start_time = time.time()
 
         if not silent:
-            subprocess.run(["python", script_filename])
+            subprocess.run([sys.executable, script_filename])
         else:
             subprocess.run(
-                ["python", script_filename],
+                [sys.executable, script_filename],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
@@ -93,7 +95,9 @@ def main():
 
             i += 1
 
-    print(script_filename_1)
+    if script_filename_2:
+        print(script_filename_1)
+
     time_file_1 = run_script(script_filename_1, time_unit, num_runs, silent)
 
     if script_filename_2:
