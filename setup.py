@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="FFpy",
-    version="1.4.1",
+    version="1.5.0",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
@@ -64,18 +64,27 @@ your Python scripts. Here’s the basic syntax:
 
 .. code:: bash
 
-   ffpy <filename.py> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-v] [-h]
+   ffpy <filename.py> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-m <mode>] [-v] [-h]
 
 -  ``<filename.py>``: Replace with the actual filename of your Python
    script in the current directory.
+
 -  ``<filename2.py>``: Optional second script for comparison.
+
 -  ``-u, --unit``: Optional flag to specify the time unit (ms or s,
    default is ms).
+
 -  ``-n, --number``: Optional flag to specify the number of runs
    (default is 1).
+
 -  ``-s, --silent``: Optional flag to run the script silently (suppress
    output).
+
+-  ``-m, --mode``: Optional flag to specify the threads (single or
+   multi, default is single).
+
 -  ``-v, --version``: Display script version.
+
 -  ``-h, --help``: Display help message.
 
 Examples 🌈
@@ -110,6 +119,22 @@ Examples 🌈
 .. code:: bash
 
    ffpy bubble_sort.py merge_sort.py
+
+6. Run scripts concurrently using multithreading mode:
+
+.. code:: bash
+
+   ffpy script.py script2.py -m multi
+
+**Note on Multithreading Mode:**
+
+When using the multithreading mode (``-m multi``), the script will be
+executed concurrently in a multithreaded fashion, leveraging multiple
+cores on your system. It’s important to note that the average execution
+time in multithreading mode may not be equal to running the program
+once, as multithreading introduces parallelism and can lead to
+variations in execution times. `Learn more [1] about
+multithreading. <https://github.com/anxkhn/FFpy/blob/main/learn_more.md#1-learn-more-about-multithreading-and-how-it-works>`__
 
 How to Use 🤔
 ~~~~~~~~~~~~~
@@ -156,7 +181,9 @@ faster than bubble sort, thanks to its efficient divide-and-conquer
 approach, resulting in a time complexity of O(n log n). On the other
 hand, bubble sort, with its quadratic time complexity of O(n^2), proves
 to be less efficient for large datasets. We can clearly see the
-execution time differences between two programs.
+execution time differences between two programs. `Learn more [2] about
+time
+complexity. <https://github.com/anxkhn/FFpy/blob/main/learn_more.md#2-learn-more-about-sorting-algorithms-their-time-complexity-and-efficiency>`__
 
 Contributing 🤝
 ---------------
