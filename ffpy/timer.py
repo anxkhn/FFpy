@@ -7,7 +7,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 from tabulate import tabulate
 
-SCRIPT_VERSION = "1.6.0"
+SCRIPT_VERSION = "1.6.1"
 
 
 def execute_python(script_filename, silent):

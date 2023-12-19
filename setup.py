@@ -2,8 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name="FFpy",
-    version="1.6.0",
+    version="1.6.1",
     packages=find_packages(),
+    install_requires=[
+        "tabulate",
+    ],
     entry_points={
         "console_scripts": [
             "ffpy = ffpy.timer:main",
