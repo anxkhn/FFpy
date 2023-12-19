@@ -194,6 +194,10 @@ merge_sort.py is 96.49% faster than bubble_sort.py.
 
 This difference in execution time is due to the fact that Merge sort is faster than bubble sort, thanks to its efficient divide-and-conquer approach, resulting in a time complexity of O(n log n). On the other hand, bubble sort, with its quadratic time complexity of O(n^2), proves to be less efficient for large datasets. We can clearly see the execution time differences between two programs. [Learn more [2] about time complexity.](https://github.com/anxkhn/FFpy/blob/main/learn_more.md#2-learn-more-about-sorting-algorithms-their-time-complexity-and-efficiency)
 
+## Working Demo
+[![asciicast](https://asciinema.org/a/627639.svg)](https://asciinema.org/a/627639)
+###### A picture is worth a thousand words, so here's a gif for you. Instead of reading the README.md, see it for yourself.
+
 ## Contributing 🤝
 
 If you'd like to contribute to FFpy, feel free to fork the repository and submit a pull request.
