@@ -2,7 +2,7 @@
 
 FFpy is a command-line tool that measures the execution time of Python scripts. It provides flexibility by allowing you to specify the time unit (milliseconds or seconds) and the number of runs for more accurate measurements.
 
-[![Current Version : ](https://img.shields.io/badge/Version-1.5.0-blue.svg)](https://pypi.org/project/FFpy/1.5.0/)
+[![Current Version : ](https://img.shields.io/badge/Version-1.6.0-blue.svg)](https://pypi.org/project/FFpy/1.6.0/)
 
 
 ## Background 🚀
@@ -34,10 +34,10 @@ pip install .
 After installation, you can use FFpy to measure the execution time of your Python scripts. Here's the basic syntax:
 
 ```bash
-ffpy <filename.py> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-m <mode>] [-v] [-h]
+ffpy <filename.py/folder> <filename2.py> [-u <unit>] [-n <num_runs>] [-s] [-m <mode>] [-v] [-h]
 ```
 
-- `<filename.py>`: Replace with the actual filename of your Python script in the current directory.
+- `<filename.py/folder>`:  Replace with the actual filename or folder of your Python script(s) in the current directory.
   
 - `<filename2.py>`: Optional second script for comparison.
   
@@ -80,21 +80,80 @@ ffpy script.py -n 10
 ffpy script.py -s
 ```
 
-5. Compare the execution times of two scripts:
+5. Run scripts concurrently using multithreading mode:
 
 ```bash
-ffpy bubble_sort.py merge_sort.py
-```
-
-6. Run scripts concurrently using multithreading mode:
-
-```bash
-ffpy script.py script2.py -m multi
+ffpy script.py -m multi
 ```
 
 **Note on Multithreading Mode:**
 
 When using the multithreading mode (`-m multi`), the script will be executed concurrently in a multithreaded fashion, leveraging multiple cores on your system. It's important to note that the average execution time in multithreading mode may not be equal to running the program once, as multithreading introduces parallelism and can lead to variations in execution times. [Learn more [1] about multithreading.](https://github.com/anxkhn/FFpy/blob/main/learn_more.md#1-learn-more-about-multithreading-and-how-it-works)
+
+
+## Types of Operation:
+
+- **Single File:** Measure the execution time of a single script.
+
+```bash
+ffpy script1.py -s
+```
+
+Output:
+```bash
+Execution time: 30.1924 ms
+```
+  
+- **Double File (Comparison):** Compare the execution times of two scripts and determine the percentage difference.
+
+2. Compare the execution times of two scripts:
+
+```bash
+ffpy script1.py script2.py -s
+```
+
+Output:
+```bash
+script1.py
+Execution time: 29.2735 ms
+script2.py
+Execution time: 533.9346 ms
+script1.py is 1723.95% faster than script2.py
+```  
+
+- **More Than Two Files (Detailed Table):** Compare execution times of multiple scripts and display a detailed table with filenames and average execution times.
+
+3. Compare execution times of multiple scripts and display a detailed table:
+
+```bash
+ffpy script1.py script2.py script3.py -s
+```
+
+or 
+
+```bash
+ffpy path/to/scripts
+```
+
+Output:
+```bash
+script1.py
+Execution time: 30.0028 ms
+script2.py
+Execution time: 533.4799 ms
+script3.py
+Execution time: 1035.9304 ms
+╒════════════╤═══════════════════════════════╕
+│ Filename   │   Average Execution Time (ms) │
+╞════════════╪═══════════════════════════════╡
+│ script1.py │                       30.0028 │
+├────────────┼───────────────────────────────┤
+│ script2.py │                      533.48   │
+├────────────┼───────────────────────────────┤
+│ script3.py │                     1035.93   │
+╘════════════╧═══════════════════════════════╛
+```
+
 
 ### How to Use 🤔
 

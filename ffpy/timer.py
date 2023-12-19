@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import time
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
+from tabulate import tabulate
 
-
-SCRIPT_VERSION = "1.5.0"
+SCRIPT_VERSION = "1.6.0"
 
 
 def execute_python(script_filename, silent):
@@ -58,9 +59,18 @@ def run_script(script_filename, mode, time_unit="ms", num_runs=1, silent=False):
     return execution_time
 
 
+def list_files(folder_path):
+    script_files = [
+        os.path.join(folder_path, f)
+        for f in os.listdir(folder_path)
+        if f.endswith(".py") and os.path.isfile(os.path.join(folder_path, f))
+    ]
+    return script_files
+
+
 def display_help():
     print(
-        "Usage: {} <script_filename_1> [script_filename_2] [-u <unit>] [-n <number>] [-s] [-m <mode>] [-V] [-H]".format(
+        "Usage: {} <filename/folder> [filename_2] [...] [-u <unit>] [-n <number>] [-s] [-m <mode>] [-V] [-H]".format(
             sys.argv[0]
         )
     )
@@ -78,67 +88,84 @@ def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-H", "--help"):
         display_help()
 
-    script_filename_1 = sys.argv[1]
-    script_filename_2 = None
+    script_filenames = []
     time_unit = "ms"
     num_runs = 1
     silent = False
     mode = "single"
 
-    i = 2
+    i = 1
     while i < len(sys.argv):
-        if sys.argv[i] in ("-u", "--unit"):
-            time_unit = sys.argv[i + 1]
-            i += 2
-        elif sys.argv[i] in ("-n", "--number"):
-            num_runs = int(sys.argv[i + 1])
-            i += 2
-        elif sys.argv[i] in ("-s", "--silent"):
-            silent = True
-            i += 1
-        elif sys.argv[i] in ("-m", "--mode"):
-            mode = sys.argv[i + 1]
-            i += 2
-        elif sys.argv[i] in ("-V", "--ver"):
-            print("{} {}".format(sys.argv[0], SCRIPT_VERSION))
-            sys.exit(0)
-        else:
-            if script_filename_2 is None:
-                script_filename_2 = sys.argv[i]
+        if sys.argv[i].startswith("-"):
+            if sys.argv[i] in ("-u", "--unit"):
+                time_unit = sys.argv[i + 1]
+                i += 2
+            elif sys.argv[i] in ("-n", "--number"):
+                num_runs = int(sys.argv[i + 1])
+                i += 2
+            elif sys.argv[i] in ("-s", "--silent"):
+                silent = True
+                i += 1
+            elif sys.argv[i] in ("-m", "--mode"):
+                mode = sys.argv[i + 1]
+                i += 2
+            elif sys.argv[i] in ("-V", "--ver"):
+                print("{} {}".format(sys.argv[0], SCRIPT_VERSION))
+                sys.exit(0)
             else:
                 print("Invalid option: {}".format(sys.argv[i]))
                 sys.exit(1)
+        else:
+            script_input = sys.argv[i]
+
+            if os.path.isdir(script_input):
+                script_filenames.extend(list_files(script_input))
+            else:
+                script_filenames.append(script_input)
 
             i += 1
 
-    if script_filename_2:
-        print(script_filename_1)
+    if len(script_filenames) > 2:
+        table_data = []
+        for script_filename in script_filenames:
+            print(script_filename)
+            execution_time = run_script(
+                script_filename, mode, time_unit, num_runs, silent
+            )
+            table_data.append([script_filename, execution_time / num_runs])
 
-    time_file_1 = run_script(script_filename_1, mode, time_unit, num_runs, silent)
+        sorted_table = sorted(table_data, key=lambda x: x[1])
+        headers = ["Filename", "Average Execution Time ({})".format(time_unit)]
+        print(tabulate(sorted_table, headers, tablefmt="fancy_grid"))
 
-    if script_filename_2:
-        print(script_filename_2)
-        time_file_2 = run_script(script_filename_2, mode, time_unit, num_runs, silent)
+    elif len(script_filenames) == 2:
+        print(script_filenames[0])
+        time_file_1 = run_script(script_filenames[0], mode, time_unit, num_runs, silent)
+        print(script_filenames[1])
+        time_file_2 = run_script(script_filenames[1], mode, time_unit, num_runs, silent)
         percentage_difference = ((time_file_2 - time_file_1) / time_file_1) * 100
 
-        if percentage_difference > 0:
+        if percentage_difference > 5:
             print(
                 "{} is {:.2f}% faster than {}".format(
-                    script_filename_1, abs(percentage_difference), script_filename_2
+                    script_filenames[0], abs(percentage_difference), script_filenames[1]
                 )
             )
-        elif percentage_difference < 0:
+        elif percentage_difference < -5:
             print(
                 "{} is {:.2f}% slower than {}".format(
-                    script_filename_1, abs(percentage_difference), script_filename_2
+                    script_filenames[0], abs(percentage_difference), script_filenames[1]
                 )
             )
         else:
             print(
-                "{} and {} have the same execution time.".format(
-                    script_filename_1, script_filename_2
+                "{} and {} have almost the same execution time.".format(
+                    script_filenames[0], script_filenames[1]
                 )
             )
+
+    else:
+        run_script(script_filenames[0], mode, time_unit, num_runs, silent)
 
 
 if __name__ == "__main__":
