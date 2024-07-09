@@ -2,7 +2,8 @@
 
 FFpy is a command-line tool that measures the execution time of Python scripts. It provides flexibility by allowing you to specify the time unit (milliseconds or seconds) and the number of runs for more accurate measurements.
 
-[![Current Version : ](https://img.shields.io/badge/Version-1.6.1-blue.svg)](https://pypi.org/project/FFpy/1.6.1/)
+[![Current Version : ](https://img.shields.io/badge/Version-1.6.2-blue.svg)](https://pypi.org/project/FFpy/1.6.2/)
+[![Downloads](https://img.shields.io/pepy/dt/ffpy?label=Downloads)](https://pepy.tech/project/ffpy)
 
 
 ## Background 🚀
